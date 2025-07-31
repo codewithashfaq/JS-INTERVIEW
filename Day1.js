@@ -13,11 +13,21 @@
 //Solution:
 
 const findLongestWord = (inputString) => {
+  if (inputString.trim().length === 0) return false;
+
   const longestWord = inputString
     .trim()
     .replace(/[^\w\s\u2010\u2011-]/g, "")
     .split(/\s+/);
-  return longestWord.sort((a, b) => a.length - b.length).at(-1);
+  //return longestWord.sort((a, b) => a.length - b.length).at(-1);
+
+  console.dir(longestWord, { breakLength: 1, maxArrayLength: null });
+
+  return longestWord.reduce(
+    (accumulator, currentWord) =>
+      currentWord.length >= accumulator.length ? currentWord : accumulator,
+    ""
+  );
 };
 
 // console.log(

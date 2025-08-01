@@ -23,11 +23,25 @@ const findLongestWord = (inputString) => {
 
   console.dir(longestWord, { breakLength: 1, maxArrayLength: null });
 
-  return longestWord.reduce(
-    (accumulator, currentWord) =>
-      currentWord.length >= accumulator.length ? currentWord : accumulator,
-    ""
-  );
+  // return longestWord.reduce(
+  //   (accumulator, currentWord) =>
+  //     currentWord.length >= accumulator.length ? currentWord : accumulator,
+  //   ""
+  // );
+
+  const n = longestWord.length;
+
+  for (let pass = 0; pass < n - 1; pass++) {
+    for (let i = 0; i < n - 1 - pass; i++) {
+      if (longestWord[i].length > longestWord[i + 1].length) {
+        const temp = longestWord[i + 1];
+        longestWord[i + 1] = longestWord[i];
+        longestWord[i] = temp;
+      }
+    }
+  }
+
+  return longestWord.at(-1);
 };
 
 // console.log(
